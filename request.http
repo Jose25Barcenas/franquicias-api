@@ -1,6 +1,28 @@
+### 1. Crear franquicia
 POST http://localhost:8080/franquicias
 Content-Type: application/json
 
 {
   "nombre": "Mi Franquicia"
+}
+
+###
+
+### 2. Crear sucursal
+POST http://localhost:8080/franquicias/1/sucursales
+Content-Type: application/json
+
+{
+  "nombre": "Sucursal Centro"
+}
+
+###
+
+### 3. Crear producto
+POST http://localhost:8080/franquicias/1/sucursales/1/productos
+Content-Type: application/json
+
+{
+  "nombre": "Coca Cola",
+  "stock": 50
 }

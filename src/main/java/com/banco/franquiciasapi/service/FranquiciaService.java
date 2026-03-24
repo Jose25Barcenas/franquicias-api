@@ -1,7 +1,8 @@
 package com.banco.franquiciasapi.service;
 
-
 import com.banco.franquiciasapi.domain.Franquicia;
+import com.banco.franquiciasapi.domain.Sucursal;
+import com.banco.franquiciasapi.domain.Producto;
 import com.banco.franquiciasapi.repository.FranquiciaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,35 @@ public class FranquiciaService {
 
     public Optional<Franquicia> obtener(Long id) {
         return franquiciaRepository.findById(id);
+    }
+
+    // ✅ agregar sucursal
+    public Franquicia agregarSucursal(Long franquiciaId, Sucursal sucursal) {
+        Franquicia f = franquiciaRepository.findById(franquiciaId).orElseThrow();
+        f.getSucursales().add(sucursal);
+        return franquiciaRepository.save(f);
+    }
+
+    // ✅ agregar producto
+    public Franquicia agregarProducto(Long franquiciaId, Long sucursalId, Producto producto) {
+        Franquicia f = franquiciaRepository.findById(franquiciaId).orElseThrow();
+
+        for (Sucursal s : f.getSucursales()) {
+            if (s.getId().equals(sucursalId)) {
+                s.getProductos().add(producto);
+            }
+        }
+
+        return franquiciaRepository.save(f);
+    }
+
+    // ✅ producto con mayor stock
+    public Producto productoConMayorStock(Long franquiciaId) {
+        Franquicia f = franquiciaRepository.findById(franquiciaId).orElseThrow();
+
+        return f.getSucursales().stream()
+                .flatMap(s -> s.getProductos().stream())
+                .max((p1, p2) -> Integer.compare(p1.getStock(), p2.getStock()))
+                .orElse(null);
     }
 }

@@ -3,6 +3,7 @@ package com.banco.franquiciasapi.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
 @Entity
 @Data
 public class Producto {

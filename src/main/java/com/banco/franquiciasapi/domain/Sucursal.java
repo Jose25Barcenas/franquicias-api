@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Data
@@ -16,5 +17,5 @@ public class Sucursal {
     private String nombre;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Producto> productos;
+    private List<Producto> productos = new ArrayList<>();
 }
