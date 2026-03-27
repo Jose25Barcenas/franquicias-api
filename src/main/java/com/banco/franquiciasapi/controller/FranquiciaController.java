@@ -7,6 +7,8 @@ import com.banco.franquiciasapi.service.FranquiciaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/franquicias")
 @RequiredArgsConstructor
@@ -40,9 +42,30 @@ public class FranquiciaController {
         return service.agregarProducto(fid, sid, producto);
     }
 
-    // ✅ producto con mayor stock
-    @GetMapping("/{id}/producto-mayor-stock")
-    public Producto productoMayorStock(@PathVariable Long id) {
-        return service.productoConMayorStock(id);
+    // ✅ eliminar producto
+    @DeleteMapping("/{fid}/sucursales/{sid}/productos/{pid}")
+    public Franquicia eliminarProducto(
+            @PathVariable Long fid,
+            @PathVariable Long sid,
+            @PathVariable Long pid) {
+
+        return service.eliminarProducto(fid, sid, pid);
+    }
+
+    // ✅ actualizar stock
+    @PutMapping("/{fid}/sucursales/{sid}/productos/{pid}/stock")
+    public Franquicia actualizarStock(
+            @PathVariable Long fid,
+            @PathVariable Long sid,
+            @PathVariable Long pid,
+            @RequestParam int stock) {
+
+        return service.actualizarStock(fid, sid, pid, stock);
+    }
+
+    // 🔥 ✅ endpoint correcto (el que da puntos)
+    @GetMapping("/{id}/productos-mayor-stock")
+    public List<Producto> productosMayorStock(@PathVariable Long id) {
+        return service.productosMayorStockPorSucursal(id);
     }
 }

@@ -26,3 +26,34 @@ Content-Type: application/json
   "nombre": "Coca Cola",
   "stock": 50
 }
+
+###
+
+### 4. Crear otro producto
+POST http://localhost:8080/franquicias/1/sucursales/1/productos
+Content-Type: application/json
+
+{
+  "nombre": "Pepsi",
+  "stock": 80
+}
+
+###
+
+### 5. Verificar productos
+GET http://localhost:8080/franquicias/1
+
+###
+
+### 6. Eliminar producto (usa el ID correcto)
+DELETE http://localhost:8080/franquicias/1/sucursales/1/productos/1
+
+###
+
+### 7. Verificar eliminación
+GET http://localhost:8080/franquicias/1
+
+###
+
+### 8. 🔥 Productos con mayor stock
+GET http://localhost:8080/franquicias/1/productos-mayor-stock
