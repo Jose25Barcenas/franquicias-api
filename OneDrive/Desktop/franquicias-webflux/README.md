@@ -173,3 +173,9 @@ docker-compose down -v
 ## Licencia
 
 MIT
+
+## Tests
+
+```bash
+./gradlew test
+```
